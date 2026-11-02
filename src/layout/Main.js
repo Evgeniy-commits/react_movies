@@ -17,11 +17,18 @@ class Main extends React.Component
             .then(response => response.json())
             .then(data => this.setState({movies:data.Search}));
     }
-    searchMovie = (str) =>
+    searchMovie = (str, type = 'all') =>
     {
-        fetch(`https://www.omdbapi.com/?s=${str}&apikey=4f3893ed`)
-            .then(response => response.json())
-            .then(data => this.setState({movies:data.Search}));
+        console.log(`str:${str};\t type:${type}`);
+        // fetch(`https://www.omdbapi.com/?s=${str}${type !== 'all' ? `&type = ${type}` : ''}&apikey=4f3893ed`)
+        //     .then(response => response.json())
+        //     .then(data => this.setState({movies:data.Search}));
+        fetch
+(
+	`https://www.omdbapi.com/?s=${str}${type !== 'all' ? `&type=${type}` : ''}&apikey=94dbc433`
+)
+	.then(response => response.json())
+	.then(data => this.setState({ movies: data.Search }));
     }
     render()
     {        
@@ -29,6 +36,7 @@ class Main extends React.Component
             <div className='main'>
             <Search searchMovie = { this.searchMovie }/>
                 {                   
+                    this.state.movies == null ? <h1>Nothing</h1> : 
                     this.state.movies.length == 0 ? <Preloader /> :
                     <MovieList movies = { this.state.movies } />
                 }
