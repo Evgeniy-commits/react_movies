@@ -29,3 +29,17 @@
             border: none;
             border-radius: 8px;
         }
+.pagination
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 24px;
+}
+.btn-current-page
+{
+    background-color: black;
+    color:white;
+    font-weight: 800;
+}
